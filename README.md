@@ -17,7 +17,7 @@
 
 - has_many :items
 - has_many :comments
-- has_one :order
+- has_many :orders
 
 ## items table
 
@@ -70,12 +70,13 @@
 
 | Column            | Type       | Options           |
 |-------------------|------------|-------------------|
-| postal number     | integer    | null: false       |
+| postal number     | string     | null: false       |
 | prefecture_id     | integer    | null: false       |
 | city              | string     | null: false       |
 | street            | string     | null: false       |
 | building_name     | string     |                   |
-| telephone_number  | integer    | null: false       |
+| telephone_number  | string     | null: false       |
+| order             | references | foreign_key: true |
 
 ### Association
 

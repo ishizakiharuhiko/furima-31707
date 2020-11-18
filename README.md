@@ -17,6 +17,7 @@
 
 - has_many :items
 - has_many :comments
+- has_one :order
 
 ## items table
 
@@ -56,16 +57,13 @@
 
 | Column          | Type       | Options           |
 |-----------------|------------|-------------------|
-| card_number     | integer    | null: false       |
-| deadline_month  | integer    | null: false       |
-| deadline_year   | integer    | null: false       |
-| security_number | integer    | null: false       |
 | item            | references | foreign_key: true |
-| address         | references | foreign_key: true |
+| user            | references | foreign_key: true |
 
 ### Association
 
 - belongs_to :item
+- belongs_to :user
 - has_one :address
 
 ## addresses table
@@ -73,7 +71,7 @@
 | Column            | Type       | Options           |
 |-------------------|------------|-------------------|
 | postal number     | integer    | null: false       |
-| prefecture        | string     | null: false       |
+| prefecture_id     | integer    | null: false       |
 | city              | string     | null: false       |
 | street            | string     | null: false       |
 | building_name     | string     |                   |

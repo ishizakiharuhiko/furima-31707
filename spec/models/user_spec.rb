@@ -30,20 +30,18 @@ describe User do
       end
       it 'passwordが空では登録できない' do
         @user.password = ''
-        @user.encrypted_password = ''
         @user.password_confirmation = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
       it 'passwordが5文字以下であれば登録できない' do
         @user.password = '111aa'
-        @user.encrypted_password = '111aa'
         @user.password_confirmation = '111aa'
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
       it 'passwordとpassword_confirmationが一致しなければ登録できない' do
-        @user.encrypted_password = '111aaa'
+        @user.password = '111aaa'
         @user.password_confirmation = '222bbb'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")

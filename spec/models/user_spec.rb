@@ -6,45 +6,45 @@ describe User do
 
   describe 'ユーザー新規登録' do
     context '新規登録がうまくいくとき' do
-      it "emailとpassword、password_confirmationが存在すれば登録できる" do
+      it 'emailとpassword、password_confirmationが存在すれば登録できる' do
         expect(@user).to be_valid
       end
-      it "passwordが6文字以上であれば登録できる" do
-        @user.password = "111aaa"
-        @user.encrypted_password = "111aaa"
-        @user.password_confirmation = "111aaa"
+      it 'passwordが6文字以上であれば登録できる' do
+        @user.password = '111aaa'
+        @user.encrypted_password = '111aaa'
+        @user.password_confirmation = '111aaa'
         expect(@user).to be_valid
       end
     end
 
     context '新規登録がうまくいかないとき' do
-      it "emailが空では登録できない" do
-        @user.email = ""
+      it 'emailが空では登録できない' do
+        @user.email = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
-      it "emailが＠を含まない場合登録できない" do
-        @user.email = "mailaddress"
+      it 'emailが＠を含まない場合登録できない' do
+        @user.email = 'mailaddress'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
-      it "passwordが空では登録できない" do
-        @user.password = ""
-        @user.encrypted_password = ""
-        @user.password_confirmation = ""
+      it 'passwordが空では登録できない' do
+        @user.password = ''
+        @user.encrypted_password = ''
+        @user.password_confirmation = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
-      it "passwordが5文字以下であれば登録できない" do
-        @user.password = "111aa"
-        @user.encrypted_password = "111aa"
-        @user.password_confirmation = "111aa"
+      it 'passwordが5文字以下であれば登録できない' do
+        @user.password = '111aa'
+        @user.encrypted_password = '111aa'
+        @user.password_confirmation = '111aa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
-      it "passwordとpassword_confirmationが一致しなければ登録できない" do
-        @user.encrypted_password = "111aaa"
-        @user.password_confirmation = "222bbb"
+      it 'passwordとpassword_confirmationが一致しなければ登録できない' do
+        @user.encrypted_password = '111aaa'
+        @user.password_confirmation = '222bbb'
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end

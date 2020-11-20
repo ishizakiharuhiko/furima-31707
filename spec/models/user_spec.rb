@@ -32,7 +32,7 @@ describe User do
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
-        expect(another_user.errors.full_messages).to include("Email has already been taken")
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       it 'passwordが空では登録できない' do
         @user.password = ''
@@ -44,13 +44,19 @@ describe User do
         @user.password = '111111'
         @user.password_confirmation = '111111'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'passwordが半角英語のみでは登録できない' do
         @user.password = 'aaaaaa'
         @user.password_confirmation = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
+      end
+      it 'passwordが全角では登録できない' do
+        @user.password = 'パスワード'
+        @user.password_confirmation = 'パスワード'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'passwordが5文字以下であれば登録できない' do
         @user.password = '111aa'
@@ -72,7 +78,7 @@ describe User do
       it 'first_nameは全角でなければ登録できない' do
         @user.first_name = 'haruhiko'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name is invalid")
+        expect(@user.errors.full_messages).to include('First name is invalid')
       end
       it 'last_nameが空では登録できない' do
         @user.last_name = ''
@@ -82,7 +88,7 @@ describe User do
       it 'last_nameは全角でなければ登録できない' do
         @user.last_name = 'ishizaki'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name is invalid")
+        expect(@user.errors.full_messages).to include('Last name is invalid')
       end
       it 'kana_first_nameが空では登録できない' do
         @user.kana_first_name = ''
@@ -92,7 +98,7 @@ describe User do
       it 'kana_first_nameは全角カナでなければ登録できない' do
         @user.kana_first_name = '陽彦'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Kana first name is invalid")
+        expect(@user.errors.full_messages).to include('Kana first name is invalid')
       end
       it 'kana_last_nameが空では登録できない' do
         @user.kana_last_name = ''
@@ -102,7 +108,7 @@ describe User do
       it 'kana_last__nameは全角カナでなければ登録できない' do
         @user.kana_last_name = '石崎'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Kana last name is invalid")
+        expect(@user.errors.full_messages).to include('Kana last name is invalid')
       end
       it 'birthdayが空では登録できない' do
         @user.birthday = ''

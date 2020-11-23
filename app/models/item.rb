@@ -8,7 +8,12 @@ class Item < ApplicationRecord
     validates :shipping_id
     validates :prefecture_id
     validates :day_id
-    validates :price
+    validates :price, 
+        numericality: {
+         :only_integer: true 
+         :less_than => 10000000
+         :greater_than => 299
+      } 
   end
 
   belungs_to :user

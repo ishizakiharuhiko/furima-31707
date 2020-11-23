@@ -12,5 +12,6 @@ class Item < ApplicationRecord
   end
 
   belungs_to :user
-  
+  has_one_attached :image
+
 end

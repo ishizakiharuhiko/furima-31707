@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
   def index
     @items = Item.order("created_at DESC")
   end
@@ -8,9 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    binding.pry
     @item = Item.new(items_params)
-    binding.pry
     if @item.save
       redirect_to root_path
     else
@@ -23,6 +23,12 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+  end
+
+  def update
+  end
+
+  def destroy
   end
 
 

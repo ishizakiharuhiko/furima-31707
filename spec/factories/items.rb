@@ -7,7 +7,7 @@ FactoryBot.define do
     shipping_id      { '2' }
     prefecture_id    { '2' }
     day_id           { '2' }
-    price            { '114514'}
+    price            { '114514' }
     user
   end
 end

@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
   belongs_to_active_hash :status
@@ -9,7 +8,6 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
-
 
   with_options presence: true do
     validates :title
@@ -23,12 +21,11 @@ class Item < ApplicationRecord
       validates :day_id
     end
 
-    validates :price, 
-        numericality: {
-         only_integer: true, 
-         less_than: 10000000,
-         greater_than: 299
-      } 
+    validates :price,
+              numericality: {
+                only_integer: true,
+                less_than: 10_000_000,
+                greater_than: 299
+              }
   end
-
 end

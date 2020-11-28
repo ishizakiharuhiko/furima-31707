@@ -28,7 +28,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'category_idが1では登録できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
@@ -38,7 +38,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
       it 'status_idが1では登録できない' do
-        @item.status_id = '1'
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Status must be other than 1')
       end
@@ -48,7 +48,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Shipping can't be blank")
       end
       it 'shipping_idが1では登録できない' do
-        @item.shipping_id = '1'
+        @item.shipping_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Shipping must be other than 1')
       end
@@ -58,7 +58,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'prefecture_idが1では登録できない' do
-        @item.prefecture_id = '1'
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Prefecture must be other than 1')
       end
@@ -68,7 +68,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Day can't be blank")
       end
       it 'day_idが1では登録できない' do
-        @item.day_id = '1'
+        @item.day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Day must be other than 1')
       end
@@ -78,12 +78,12 @@ describe Item do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it 'priceが300より小さいと登録できない' do
-        @item.price = '250'
+        @item.price = 250
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be greater than 299')
       end
       it 'priceが9,999,999より大きいと登録できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price must be less than 10000000')
       end

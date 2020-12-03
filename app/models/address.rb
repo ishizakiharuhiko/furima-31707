@@ -12,5 +12,5 @@ class Address < ApplicationRecord
     validates :telephone_number, numericality: { only_integer: true }, length: { maximum: 11 }
   end
 
-  validates :building_name
+  validate :building_name
 end

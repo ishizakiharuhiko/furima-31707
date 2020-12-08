@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       @order.save
       @address = Address.new(address_params)
       @address.save
-      return redirect_to item_path(@item)
+      redirect_to item_path(@item)
     else
       render 'index'
     end
@@ -29,22 +29,23 @@ class OrdersController < ApplicationController
 
   def order_params
     params.permit(
-      :user_id, :item_id).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
+      :user_id, :item_id
+    ).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
-  
+
   def address_params
     params.require(:address).permit(
       :postal_number, :prefecture_id, :city, :street, :building_name, :telephone_number
-      ).merge(order_id: @order.id)
+    ).merge(order_id: @order.id)
   end
 
   def pay_item
-  Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-  Payjp::Charge.create(
-    amount: @item.price,
-    card: order_params[:token],
-    currency: 'jpy'
-  )
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: order_params[:token],
+      currency: 'jpy'
+    )
   end
 
   def buyer_confirmation
@@ -52,6 +53,6 @@ class OrdersController < ApplicationController
   end
 
   def buyed_item_confirmation
-    redirect_to root_path if Order.ids.include (@item.id)
+    redirect_to root_path if Order.ids.include(@item.id)
   end
 end

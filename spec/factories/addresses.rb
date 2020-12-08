@@ -6,6 +6,6 @@ FactoryBot.define do
     street           { '中央区' }
     building_name    { 'でかいビル' }
     telephone_number { '08012345678' }
-    order            {FactoryBot.build(:order)}
+    order            { FactoryBot.build(:order) }
   end
 end

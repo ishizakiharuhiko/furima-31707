@@ -12,12 +12,11 @@ describe Order do
     end
   end
 
-    context '商品購入がうまくいかないとき' do
-      it 'トークンが空だと購入できない' do
-        @order.token = ''
-        @order.valid?
-        expect(@order.errors.full_messages).to include("Token can't be blank")
-      end
+  context '商品購入がうまくいかないとき' do
+    it 'トークンが空だと購入できない' do
+      @order.token = ''
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Token can't be blank")
     end
-
+  end
 end

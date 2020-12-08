@@ -24,12 +24,12 @@ describe Address do
       it 'postal_numberにハイフンがなければ登録できない' do
         @address.postal_number = '1234567'
         @address.valid?
-        expect(@address.errors.full_messages).to include("Postal number is invalid")
+        expect(@address.errors.full_messages).to include('Postal number is invalid')
       end
       it 'postal_numberが数字でなければ登録できない' do
         @address.postal_number = 'abc-defg'
         @address.valid?
-        expect(@address.errors.full_messages).to include("Postal number is invalid")
+        expect(@address.errors.full_messages).to include('Postal number is invalid')
       end
       it 'prefecture_idが空では登録できない' do
         @address.prefecture_id = ''
@@ -39,7 +39,7 @@ describe Address do
       it 'prefecture_idが1では登録できない' do
         @address.prefecture_id = '1'
         @address.valid?
-        expect(@address.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@address.errors.full_messages).to include('Prefecture must be other than 1')
       end
       it 'cityが空では登録できない' do
         @address.city = ''
@@ -59,7 +59,7 @@ describe Address do
       it 'telephone_numberが半角数字でなければ登録できない' do
         @address.telephone_number = '電話番号'
         @address.valid?
-        expect(@address.errors.full_messages).to include("Telephone number is not a number")
+        expect(@address.errors.full_messages).to include('Telephone number is not a number')
       end
     end
   end

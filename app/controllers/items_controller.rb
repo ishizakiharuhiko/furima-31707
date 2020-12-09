@@ -1,10 +1,11 @@
 class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :contributor_confirmation, except: [:index, :new, :show]
+  before_action :contributor_confirmation, except: [:index, :new, :show, :create]
 
   def index
     @items = Item.order('created_at DESC')
+    @orders = Order.all
   end
 
   def new
@@ -24,6 +25,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @orders = Order.all
   end
 
   def update

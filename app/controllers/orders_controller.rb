@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
-  before_action :set_item, only: [:index, :create]
+  before_action :set_item
   before_action :authenticate_user!, only: [:index]
   before_action :buyer_confirmation, only: [:index]
 
   def index
+
     @order_address = OrderAddress.new
   end
 
@@ -44,6 +45,6 @@ class OrdersController < ApplicationController
   end
 
   def buyed_item_confirmation
-    redirect_to root_path if Order.ids.include(@item.id)
+    redirect_to root_path if Orders.exists?(@item.id) %>
   end
 end

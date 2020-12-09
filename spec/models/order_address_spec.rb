@@ -12,7 +12,6 @@ describe OrderAddress do
       end
     end
 
-
     context '住所登録がうまくいかないとき' do
       it 'トークンが空だと購入できない' do
         @order_address.token = ''

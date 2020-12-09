@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   before_action :buyer_confirmation, only: [:index]
 
   def index
-
+    @orders = Order.all
+    redirect_to root_path if @orders.exists?(item_id: @item.id)
     @order_address = OrderAddress.new
   end
 
@@ -42,9 +43,5 @@ class OrdersController < ApplicationController
 
   def buyer_confirmation
     redirect_to root_path if current_user == @item.user
-  end
-
-  def buyed_item_confirmation
-    redirect_to root_path if Orders.exists?(@item.id) %>
   end
 end

@@ -4,17 +4,14 @@ class OrdersController < ApplicationController
   before_action :buyer_confirmation, only: [:index]
 
   def index
-    @order = Order.new
-    @address = Address.new
+    @order_address = OrderAddress.new
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.valid?
+    @order_address = OrderAddress.new(order_params)
+    if @order_address.valid?
+      @order_address.save
       pay_item
-      @order.save
-      @address = Address.new(address_params)
-      @address.save
       redirect_to item_path(@item)
     else
       render 'index'
@@ -29,14 +26,8 @@ class OrdersController < ApplicationController
 
   def order_params
     params.permit(
-      :user_id, :item_id
-    ).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
-  end
-
-  def address_params
-    params.require(:address).permit(
-      :postal_number, :prefecture_id, :city, :street, :building_name, :telephone_number
-    ).merge(order_id: @order.id)
+      :user_id, :item_id, :postal_number, :prefecture_id, :city, :street, :building_name, :telephone_number
+    )
   end
 
   def pay_item

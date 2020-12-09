@@ -15,9 +15,9 @@ class OrderAddress
   validate :building_name
 
   def save
-    order = Order.create(token: params[:token], item_id: item_id, user_id: current_user.id)
+    order = Order.create(token: token, item_id: item_id, user_id: user_id)
     Address.create(
-      postal_number: postal_number, prefecture_id: prefecture_id, city: city, street: street, telephone_number: telephone_number, building_name: building_name, oredr_id: order.id
+      postal_number: postal_number, prefecture_id: prefecture_id, city: city, street: street, telephone_number: telephone_number, building_name: building_name, order_id: order.id
     )
   end
 end

@@ -10,6 +10,10 @@ describe OrderAddress do
       it 'token,postal_number,prefecture_id, city, street, telephone_numberが存在すれば登録できる' do
         expect(@order_address).to be_valid
       end
+      it 'building_nameはなくても登録できる' do
+        @order_address.building_name = ''
+        expect(@order_address).to be_valid
+      end
     end
 
     context '住所登録がうまくいかないとき' do
@@ -62,6 +66,16 @@ describe OrderAddress do
         @order_address.telephone_number = '電話番号'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Telephone number is not a number')
+      end
+      it 'item_idが空では購入できない' do
+        @order_address.item_id = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
+      it 'user_idが空では購入できない' do
+        @order_address.user_id = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
       end
     end
   end

@@ -1,11 +1,10 @@
 class OrdersController < ApplicationController
   before_action :set_item
+  before_action :set_order_all, only: [:index]
   before_action :authenticate_user!, only: [:index]
   before_action :buyer_confirmation, only: [:index]
 
   def index
-    @orders = Order.all
-    redirect_to root_path if @orders.exists?(item_id: @item.id)
     @order_address = OrderAddress.new
   end
 
@@ -26,6 +25,10 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
+  def set_order_all
+    @orders = Order.all
+  end
+
   def order_params
     params.require(:order_address).permit(
       :token, :postal_number, :prefecture_id, :city, :street, :building_name, :telephone_number
@@ -42,6 +45,6 @@ class OrdersController < ApplicationController
   end
 
   def buyer_confirmation
-    redirect_to root_path if current_user == @item.user
+    redirect_to root_path unless current_user != @item.user || @item.order.blank?
   end
 end

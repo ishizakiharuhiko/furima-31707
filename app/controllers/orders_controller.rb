@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order_all, only: [:index]
   before_action :authenticate_user!, only: [:index]
   before_action :buyer_confirmation, only: [:index]
+  before_action :buyed_item_confirmation, only: [:index]
 
   def index
     @order_address = OrderAddress.new
@@ -45,6 +46,10 @@ class OrdersController < ApplicationController
   end
 
   def buyer_confirmation
-    redirect_to root_path unless current_user != @item.user || @item.order.blank?
+    redirect_to root_path if current_user == @item.user 
+  end
+
+  def buyed_item_confirmation
+    redirect_to root_path if @item.order.present?
   end
 end
